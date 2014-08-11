@@ -90,9 +90,6 @@ public class FallbackConfig extends AbstractModule {
         case "ie":
         case "iexplore":
         case "iexplorer":
-            DesiredCapabilities capabilitiesIE = DesiredCapabilities.internetExplorer();
-            capabilitiesIE.setCapability(InternetExplorerDriver.
-                    INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
             return new InternetExplorerDriver();
         case "chrome":
             Map<String, String> prefs = new HashMap<String, String>();
