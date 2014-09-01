@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
+import com.google.common.io.Files;
 import org.jenkinsci.test.acceptance.Matcher;
 import org.jenkinsci.test.acceptance.slave.SlaveController;
 import org.jenkinsci.utils.process.CommandBuilder;
@@ -84,7 +85,8 @@ public abstract class Slave extends Node {
      */
     public void asLocal() {
         assertCurl();
-        File jar = new File("/tmp/slave"+createRandomName()+".jar");
+
+        File jar = new File(Files.createTempDir(),createRandomName()+".jar");
         find(by.option("hudson.slaves.CommandLauncher")).click();
         find(by.input("_.command")).sendKeys(String.format(
                 "sh -c 'curl -s -o %1$s %2$sjnlpJars/slave.jar && java -jar %1$s'",
